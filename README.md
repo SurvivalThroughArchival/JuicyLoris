@@ -76,6 +76,8 @@ These are lines I've made a quick note of, just noting things down, not set in s
 
 //loris.h - 129, 300, 306,312,  316
 
+//marker.cpp - 153 has std::unary function, is that deprecated?
+
 //morpher.cpp - 170, 507, 522
 
 //notifier not checked
