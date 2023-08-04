@@ -49,7 +49,15 @@ Look it's all just source files anyway, just dump it in the producer if you don'
 
 # Quick Notes to potentially have a ganders at:
 
-Deprecated in C++11 unary_function, binary_function, not1. Sprinkled about in Partial, Makrer and Breakpoint files. 
+Deprecated in C++11 unary_function, binary_function, not1. Sprinkled about in Partial, Maker and Breakpoint files. 
+
+Progress on unary function, and not1, not1 can be replaced by not_fn. Unary can be replaced with std::function, with a little re-write std::function<bool(object)>
+
+I don't know what to do with binary function, the template is described as in1, in2, and return value (first arg, second arg, and result technically : https://en.cppreference.com/w/cpp/utility/functional/binary_function)
+
+People have suggested on StackOverflow the replacement is a lambda, and unary function and binary function can be replaced with lambdas. Though i'm unsure (currently) how exactly to go about that.
+
+std Function will likely need replacing as it too will be depreated. For now this is a quick fix to quiet the warnings; which is the current mission. 
 
 These are lines I've made a quick note of, just noting things down, not set in stone they actually wrong, just worth having a look it for any signs or bad code smells:
 
