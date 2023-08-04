@@ -57,6 +57,12 @@ I don't know what to do with binary function, the template is described as in1, 
 
 People have suggested on StackOverflow the replacement is a lambda, and unary function and binary function can be replaced with lambdas. Though i'm unsure (currently) how exactly to go about that.
 
+useful links: https://stackoverflow.com/questions/70523732/unary-function-and-binary-function-are-deprecated-in-c-11-and-removed-in-c
+
+and: https://stackoverflow.com/questions/33114656/replacement-for-stdbinary-function
+
+One of the last comments down the page suggests just removing the binary function call and just use Lambdas. Which seems plausible to port to. 
+
 std Function will likely need replacing as it too will be depreated. For now this is a quick fix to quiet the warnings; which is the current mission. 
 
 These are lines I've made a quick note of, just noting things down, not set in stone they actually wrong, just worth having a look it for any signs or bad code smells:
