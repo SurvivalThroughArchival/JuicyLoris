@@ -98,10 +98,7 @@ int main (int argc, char** argv)
 
     // Get starting timepoint
     auto start = std::chrono::high_resolution_clock::now();
- 
-  
- 
- 
+
     //        analyze clarinet tone
     if (printActions)
         cout << "importing clarinet samples" << endl;
@@ -115,8 +112,6 @@ int main (int argc, char** argv)
         cout << "analyzing clarinet 4G#" << endl;
     a.analyze( f.samples(), f.sampleRate()  );
     PartialList clar = a.partials();
-    
-    // DBG("test" << a.partials().size());
     
     // channelize and distill
     if (printActions)
