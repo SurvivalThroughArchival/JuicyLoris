@@ -5,7 +5,7 @@ See: http://www.cerlsoundgroup.org/Loris/
 
 This repo is an attempt to Archive and modernise an old Spectral Morphing library called Loris, historically it existed as an application called Lemur. (Which is hard to find any trace of on the internet)
 
-This library is also used in the Kyma hardware sound computer; where there's a real time implementation that uses .SPC files. The Loris library creates .SDIF files, that once analysis has been done, it's quicker to synthesise from. However it's not the ideal format for block based audio processing, as the timing envelope brakpoints are not evenly spaced. There is a SCP File.cpp in the source, which enables writing to SPC. This is probably the best best to explore how to do real time morphing from a la Kyma.   
+This library is also used in the Kyma hardware sound computer; where there's a real time implementation that uses .SPC files. The Loris library creates .SDIF files, that once analysis has been done, it's quicker to synthesise from. However it's not the ideal format for block based audio processing, as the timing envelope brakpoints are not evenly spaced. There is a SCP File.cpp in the source, which enables writing to SPC. This is probably the best best to explore how to do real time morphing from; a la Kyma.   
 
 # BUILD INSTRUCTIONS:
 ```
@@ -41,11 +41,16 @@ target_compile_options(AudioPluginExample PRIVATE -Werror -Wextra)
 
 This will hammer out the faults in the library, there's many type issues. And of course it's using 32bit. So 64bit might be worth addressing/looking into. 
 
+Changing to release mode seems to completely break things, runs through the code in 1.5 seconds (compared to 9/10 seconds) and leaves you with a mangled piece of audio. Debug mode seems to save the day somehow, and I don't exactly know why yet. 
+
 # To JUCE devs that don't like or use CMAKE
 
 Look it's all just source files anyway, just dump it in the producer if you don't want to faff with CMAKE
 
 # Quick Notes to potentially have a ganders at:
+
+Deprecated in C++11 unary_function, binary_function, not1. Sprinkled about in Partial, Makrer and Breakpoint files. 
+
 These are lines I've made a quick note of, just noting things down, not set in stone they actually wrong, just worth having a look it for any signs or bad code smells:
 
 //AiffData.cpp - Ln: 65 + 66, fn ln:87 (91,92), 126, // 127, 129, 130,// 154,155,156
