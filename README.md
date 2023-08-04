@@ -38,8 +38,15 @@ Uncomment these lines in the CMakeLists.txt file to see the hideuousness:
 target_compile_options(AudioPluginExample PRIVATE -Wall)
 target_compile_options(AudioPluginExample PRIVATE -Werror -Wextra)
 ```
+
+This will hammer out the faults in the library, there's many type issues. And of course it's using 32bit. So 64bit might be worth addressing/looking into. 
+
+# To JUCE devs that don't like or use CMAKE
+
+Look it's all just source files anyway, just dump it in the producer if you don't want to faff with CMAKE
+
 # Quick Notes to potentially have a ganders at:
-These are lines I've made a quick note of:
+These are lines I've made a quick note of, just noting things down, not set in stone they actually wrong, just worth having a look it for any signs or bad code smells:
 
 //AiffData.cpp - Ln: 65 + 66, fn ln:87 (91,92), 126, // 127, 129, 130,// 154,155,156
 
