@@ -5,7 +5,7 @@ See: http://www.cerlsoundgroup.org/Loris/
 
 This repo is an attempt to Archive and modernise an old Spectral Morphing library called Loris, historically it existed as an application called Lemur. (Which is hard to find any trace of on the internet)
 
-This library is alos used in the Kyma hardware sound computer, where there's a real time implementation that uses .SPC files. The Loris library creates .SDIF files, that once analysis has been done, it's quicker to synthesise from. However it's not the ideal format for block based audio processing, as the timing envelope brakpoints are not evenly spaced. There is a SCP File.cpp in the source, which enables writing to SPC  
+This library is also used in the Kyma hardware sound computer; where there's a real time implementation that uses .SPC files. The Loris library creates .SDIF files, that once analysis has been done, it's quicker to synthesise from. However it's not the ideal format for block based audio processing, as the timing envelope brakpoints are not evenly spaced. There is a SCP File.cpp in the source, which enables writing to SPC. This is probably the best best to explore how to do real time morphing from a la Kyma.   
 
 # BUILD INSTRUCTIONS:
 ```
@@ -23,12 +23,21 @@ A number of people have tried to make the Spectral Morphing library work on Wind
 
 I wanted a conscise easy to use static library that could be included in Juce Projects, or other C++ projects, and be made with CMake and more modern C++ standards. 
 
-The moving over to modern C++ standards will be gradual, and I'd appreciate any help or advice. 
+The moving over to modern C++ standards will be gradual, and I'd appreciate any help or advice. I have started, the mission being make the library with CMake instead of Auto Conf/AutoMake. 
+The other parts are making it at least compile and work by replacing depracted/removed parts of the C++ language, such as changing the auto_ptr to using unique_ptr, and a few other edits. 
 
 There's a reliance on iterators, as the c++ version used to originally write the library didn't have range based for loops.
 
-There's a number of iffy bits in the code, seemingly lots of raw pointers. I've changed the auto_ptr to using unique_ptr, and made a few other edits. 
+There's a number of iffy bits in the code, seemingly lots of raw pointers.
 
+# Reccomended settings for debugging/testing/development
+
+Uncomment these lines in the CMakeLists.txt file to see the hideuousness:
+
+#target_compile_options(AudioPluginExample PRIVATE -Wall)
+#target_compile_options(AudioPluginExample PRIVATE -Werror -Wextra)
+
+# Quick Notes to potentially have a ganders at:
 These are lines I've made a quick note of:
 
 //AiffData.cpp - Ln: 65 + 66, fn ln:87 (91,92), 126, // 127, 129, 130,// 154,155,156
