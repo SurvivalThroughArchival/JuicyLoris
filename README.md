@@ -33,9 +33,10 @@ There's a number of iffy bits in the code, seemingly lots of raw pointers.
 # Reccomended settings for debugging/testing/development
 
 Uncomment these lines in the CMakeLists.txt file to see the hideuousness:
+
 ```
-#target_compile_options(AudioPluginExample PRIVATE -Wall)
-#target_compile_options(AudioPluginExample PRIVATE -Werror -Wextra)
+target_compile_options(AudioPluginExample PRIVATE -Wall)
+target_compile_options(AudioPluginExample PRIVATE -Werror -Wextra)
 ```
 # Quick Notes to potentially have a ganders at:
 These are lines I've made a quick note of:
