@@ -23,8 +23,8 @@ A number of people have tried to make the Spectral Morphing library work on Wind
 
 I wanted a conscise easy to use static library that could be included in Juce Projects, or other C++ projects, and be made with CMake and more modern C++ standards. 
 
-The moving over to modern C++ standards will be gradual, and I'd appreciate any help or advice. I have started, the mission being make the library with CMake instead of Auto Conf/AutoMake. 
-The other parts are making it at least compile and work by replacing depracted/removed parts of the C++ language, such as changing the auto_ptr to using unique_ptr, and a few other edits. 
+The moving over to modern C++ standards will be gradual, and I'd appreciate any help or advice. I have started, the first mission was to make the library with CMake instead of Auto Conf/AutoMake. 
+The other parts were making it at least compile and work by replacing depracted/removed parts of the C++ language, such as changing the auto_ptr to using unique_ptr, and a few other edits. 
 
 There's a reliance on iterators, as the c++ version used to originally write the library didn't have range based for loops.
 
