@@ -11,6 +11,9 @@ add_executable(HelloLorris)
 
 target_sources(HelloLorris PRIVATE main.cpp)
 
+#target_compile_options(AudioPluginExample PRIVATE -Wall)
+#target_compile_options(AudioPluginExample PRIVATE -Werror -Wextra)
+
 target_link_libraries(HelloLorris PRIVATE Loris)
 
 set_target_properties(
