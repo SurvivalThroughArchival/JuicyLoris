@@ -47,6 +47,37 @@ Changing to release mode seems to completely break things, runs through the code
 
 Look it's all just source files anyway, just dump it in the producer if you don't want to faff with CMAKE
 
+# Recent changes:
+
+So many changes don't know where to start. But it compiles without a hitch with optimisations on, and before the compiler was at a loss, and garbling the output, albeit very quickly. 
+
+Optimisations now work, and the time is down from 10 seconds to 0.6 seconds on M1 for the exectuable. In Juce running on a seperate thread it takes 1.6 seconds for a morph, of 2samples around 3 seconds long. (I don't know why there's a discrepency in time there)
+
+The time is how long it takes for two samples of 3seconds long, to be analysed, time stretched, dialted and resynthesis of the partials. 
+
+Some imrpovement on speed could be made. I had it running at 0.4seconds at one stage, before static casting lots of wrong type comparisons. The compiler was able to catch them, and think saved sometime compared to casting. So maybe there's a risk that could be taken there, un-doing all the static cast, or figuring if that is really causing a slight slow down. 
+
+Tested on M1 and MacOS 10.13, so if you have Cmake installed you should be good to go. Much faster on M1 unsurprisingly. 
+
+This library can work with FFTW but I'm going to have to fugure out building that statically and linking to Loris, as apparently that could be a speed improvement. 
+
+Not all errors are accounted for, I've done my best, but there's still unused functions (that are actually used), some assigning result to itself stuff, some unused parameters. 
+
+# Next Steps:
+
+Carrying on optimisations on library, but in a reasonable state for now. 
+
+Explore adding FFTW
+
+Upload basic Juce example, or the whole plugin I've been working on
+
+Figure out displaying the partials in the envelopes, and how to get inside the iterators for the paritals to display some relevant information/track partials over time. 
+
+Figure out resynthesis in real time. So either just block load parts of the SDIF file, and synth from that. Or read partials and map directly to additive synth. Or look at the spc file,
+as that's what the real time paper on it suggests doing, the SDIF isn't block based, or not equally spaced, and the spc file is a better match for block based processing I think, I haven't had a look yet. 
+
+So get more relevant information about the partials and envelopes, and try and side step that abstraction with break point envelopes into a normalised parameter that can be updated or respond to real time interaction. But that requires unpacking the what this managerie of fuck whittery that is the morph class abstraction. 
+
 # Quick Notes to potentially have a ganders at:
 
 Deprecated in C++11 unary_function, binary_function, not1. Sprinkled about in Partial, Maker and Breakpoint files. 
