@@ -37,39 +37,13 @@
 
 #include "Analyzer.h"
 
-#include "AssociateBandwidth.h"
-#include "Breakpoint.h"
-#include "BreakpointEnvelope.h"
-#include "Envelope.h"
-#include "F0Estimate.h"
-#include "LorisExceptions.h"
-#include "KaiserWindow.h"
-#include "Notifier.h"
-#include "Partial.h"
-#include "PartialPtrs.h"
-#include "ReassignedSpectrum.h"
-#include "SpectralPeakSelector.h"
-#include "PartialBuilder.h"
-
-#include "phasefix.h"   //  for frequency/phase fixing at end of analysis
-
-
-
-#include <algorithm>
-#include <cmath>
-#include <functional>   //  for std::plus
-#include <memory>
-#include <numeric>      //  for std::inner_product
-#include <utility>
-#include <vector>
-
 using namespace std;
 
-#if defined(HAVE_M_PI) && (HAVE_M_PI)
-    const double Pi = M_PI;
-#else
-    const double Pi = 3.14159265358979324;
-#endif
+// #if defined(HAVE_M_PI) && (HAVE_M_PI)
+//     const double Pi = M_PI;
+// #else
+//     const double Pi = 3.14159265358979324;
+// #endif
 
 //  begin namespace
 namespace Loris {

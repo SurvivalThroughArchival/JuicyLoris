@@ -35,6 +35,12 @@
  */
  
 #include "SpectralPeaks.h"
+#include "Breakpoint.h"
+#include "Notifier.h"
+#include "ReassignedSpectrum.h"
+
+
+#include <cmath>    //  for abs and fabs
 
 //	begin namespace
 namespace Loris {

@@ -2,10 +2,10 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Define if building universal (internal helper macro) */
-//#define AC_APPLE_UNIVERSAL_BUILD 1
+#define AC_APPLE_UNIVERSAL_BUILD 1
 
 /* Define to enable internal Loris debugging code (not recommended). */
-/* #undef Debug_Loris */
+// #undef Debug_Loris 
 
 /* Define to 1 if you have the <csdl.h> header file. */
 /* #undef HAVE_CSDL_H */

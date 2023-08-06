@@ -32,7 +32,14 @@
  */
 
 #include "Marker.h"
+#include "BigEndian.h"
+#include "LorisExceptions.h"
+#include "Notifier.h"
 
+#include <climits>
+#include <cmath>
+#include <fstream>
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -48,7 +55,7 @@
 #endif
 
 #if ! defined( SIZEOF_LONG )
-#define SIZEOF_LONG 4	// not for DEC Alpha!
+#define SIZEOF_LONG 8	// not for DEC Alpha!
 #endif
 
 
@@ -65,7 +72,7 @@ typedef unsigned int 	Uint_16;
 #if SIZEOF_INT == 4
 typedef int 			Int_32;
 typedef unsigned int 	Uint_32;
-#elif SIZEOF_LONG == 4
+#elif SIZEOF_LONG == 8
 typedef long 			Int_32;
 typedef unsigned long 	Uint_32;
 #else

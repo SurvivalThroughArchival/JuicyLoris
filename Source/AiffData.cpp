@@ -37,16 +37,6 @@
 
 #include "AiffData.h"
 
-#include "BigEndian.h"
-#include "LorisExceptions.h"
-#include "Marker.h"
-#include "Notifier.h"
-
-#include <climits>
-#include <cmath>
-#include <fstream>
-#include <iostream>
-
 //	begin namespace
 namespace Loris {
 
@@ -753,22 +743,27 @@ convertBytesToSamples( const std::vector< Byte > & bytes,
 	//	scale to make a double:
 	const double oneOverMax = std::pow(0.5, double(bps-1));
 	long samp;
-	
+	//u_int samp;
 	std::vector< Byte >::const_iterator bytePos = bytes.begin();
 	std::vector< double >::iterator samplePos = samples.begin();
 	while ( samplePos != samples.end() )
 	{
 		//	assign the leading byte, so that the sign
 		//	is preserved:
+		// samp = static cast char but it's a u_int or long, who knows what's happening here
 		samp = static_cast<char>(*(bytePos++));
 		for ( int j = 1; j < bytesPerSample; ++j )
 		{
 			Assert( bytePos != bytes.end() );
-			
 			//	OR bytes after the most significant, so
 			//	that their sign is ignored:
+			//  left shift of negative value -1 runtime error undefined behaviour:
+			//  cause: it was the result of samp being a long, instead of u_int, seemed to fix it
+			//  hot, dirty fix, 
+			//samp = (samp << 8) + (unsigned char)*(bytePos++);
+
+			//left shift of negative value -1
 			samp = (samp << 8) + (unsigned char)*(bytePos++);
-			
 			//	cannot decide why this didn't work,
 			//	instead of the add above.
 			//samp |= (unsigned long)*(bytePos++);
@@ -842,14 +837,19 @@ convertSamplesToBytes( const std::vector< double > & samples,
 # define HUGE_VAL HUGE
 #endif							/* HUGE_VAL */
 
-#define FloatToUnsigned(f)((Int_32)((Int_32(f - 2147483648.0)) + (Int_32)(2147483647)) + 1)
+//#define FloatToUnsigned(f)((Int_32)((Int_32(f - 2147483648.0)) + (Int_32)(2147483647)) + 1)
+
+//#define FloatToUnsigned(f)((double)((double(f - 2147483648.0)) + (double)(2147483647.0)) + 1)
+// probably still don't want to do C style casting here:
+#define FloatToUnsigned(f)((double)((f - 2147483648.0) + (2147483647.0)) + 1)
 
 void ConvertToIeeeExtended(double num, extended80& x)
 {
 	int sign;
 	int expon;
 	double fMant, fsMant;
-	Int_32 hiMant, loMant;
+	u_int hiMant, loMant;
+	//Int_32 hiMant, loMant;
 	char * bytes = x.data;
 
 	if (num < 0) {
@@ -914,8 +914,10 @@ void ConvertToIeeeExtended(double num, extended80& x)
 double ConvertFromIeeeExtended(const extended80& x)
 {								/* LCN */ /* ? */
 	double f;
-	int expon;
-	Int_32 hiMant, loMant;
+	//int expon;
+	u_int expon;
+	u_int hiMant, loMant;
+	//Int_32 hiMant, loMant;
 	const char * bytes = x.data;
 
 	expon = ((bytes[0] & 0x7F) << 8) | (bytes[1] & 0xFF);
@@ -935,6 +937,10 @@ double ConvertFromIeeeExtended(const extended80& x)
 			f = HUGE_VAL;
 		else {
 			expon -= 16383;
+			// this is the most comedy part of the code so far "UnsignedToFloat" 
+			// which is a defined as:
+			// #define UnsignedToFloat(u) (((double)((Int_32)(u - (Int_32)(2147483647) - 1))) + 2147483648.0)
+
 			f = ldexp(UnsignedToFloat(hiMant), expon -= 31);
 			f += ldexp(UnsignedToFloat(loMant), expon -= 32);
 		}

@@ -540,6 +540,7 @@ Channelizer::channelize( Partial & partial ) const
 	int label = 0;
 	if ( 0 < partial.numBreakpoints() ) //  should always be the case
 	{        
+        // this gives a runtime error, inf is outside the range of representable values of type int. 
 		label = (int)((weightedlabel / partial.numBreakpoints()) + 0.5);
 	}
 	Assert( label >= 0 );

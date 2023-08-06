@@ -34,9 +34,34 @@
  */
 #include <memory>
 #include <vector>
+#include <algorithm>
+#include <cmath>
+#include <functional>   //  for std::plus
+#include <numeric>      //  for std::inner_product
+#include <utility>
+
+#include "AssociateBandwidth.h"
+#include "Breakpoint.h"
+#include "BreakpointEnvelope.h"
+#include "Envelope.h"
+#include "F0Estimate.h"
+#include "LorisExceptions.h"
+#include "KaiserWindow.h"
 #include "LinearEnvelope.h"
+#include "Notifier.h"
 #include "Partial.h"
 #include "PartialList.h"
+#include "PartialPtrs.h"
+#include "ReassignedSpectrum.h"
+#include "SpectralPeakSelector.h"
+#include "PartialBuilder.h"
+
+#include "phasefix.h"   //  for frequency/phase fixing at end of analysis
+
+
+
+
+
 // #include "SpectralPeaks.h"
 
 //  begin namespace
@@ -510,8 +535,24 @@ public:
     //  Fundamental and amplitude envelopes are always constructed during
     //  analysis, these members do nothing, and are retained for backwards
     //  compatibility.
-    void buildAmpEnv( bool TF = true ) { TF = TF; }
-    void buildFundamentalEnv( bool TF = true ) { TF = TF; }
+    // void buildAmpEnv( bool TF  ) 
+    // { 
+    //     TF = true; 
+    //     debugger << "value of TF " << TF << std::endl;
+    // }
+    // void buildFundamentalEnv( bool TF ) 
+    // { 
+    //     TF = true; 
+    //     debugger << "value of TF " << TF << std::endl;
+    // }
+    void buildAmpEnv( bool TF = true ) 
+    { 
+        TF = TF; 
+    }
+    void buildFundamentalEnv( bool TF = true ) 
+    { 
+        TF = TF; 
+    }
 
 //  -- private member variables --
 

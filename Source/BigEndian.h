@@ -33,8 +33,12 @@
  *
  */
 
+#include "LorisExceptions.h"
+
 #include <iosfwd>
 
+#include <vector>
+#include <iostream>
 //	begin namespace
 namespace Loris {
 

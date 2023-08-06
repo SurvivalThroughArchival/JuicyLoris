@@ -35,10 +35,20 @@
  * http://www.cerlsoundgroup.org/Loris/
  *
  */
-
+#pragma once
 #include "LinearEnvelope.h"
 #include "PartialList.h"
 #include "F0Estimate.h" 
+
+#include "LorisExceptions.h"
+#include "KaiserWindow.h"
+#include "Notifier.h"
+#include "PartialUtils.h"
+#include "ReassignedSpectrum.h"
+#include "SpectralPeakSelector.h"
+
+#include <algorithm>
+#include <cmath>
 
 #include <memory>
 #include <vector>

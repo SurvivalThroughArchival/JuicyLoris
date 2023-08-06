@@ -252,6 +252,9 @@ public:
         Default_FadeTime_Ms = 1,
         Default_SampleRate_Hz = 44100
     };
+
+	// static const double Default_FadeTime_Ms = 1;
+	// static const double Default_SampleRate_Hz = 44100;
     
     // enum EnhancementFlag { Sinusoidal = 0,  BwEnhanced = 1 };
 

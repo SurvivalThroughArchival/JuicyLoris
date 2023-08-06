@@ -100,7 +100,7 @@ Dilator::warpTime( double currentTime ) const
 {
     long idx = std::distance( _initial.begin(),
                              std::lower_bound( _initial.begin(), _initial.end(), currentTime ) );
-    Assert( idx == (long)_initial.size() || currentTime <= _initial[idx] );
+    Assert( idx == static_cast<double>( _initial.size() ) || currentTime <= _initial[idx] );
     
     //	compute a new time for the Breakpoint at pIter:
     double newtime = 0;
@@ -114,7 +114,7 @@ Dilator::warpTime( double currentTime ) const
         else
             newtime = _target[idx] + (currentTime - _initial[idx]);
     }
-    else if ( idx == _initial.size() ) 
+    else if ( idx == static_cast<double>( _initial.size() ) ) 
     {
         //	all time points in _initial are earlier than 
         //	the currentTime; shift:
@@ -195,7 +195,7 @@ Dilator::dilate( Partial & p ) const
 		double currentTime = iter.time();
         idx = std::distance( _initial.begin(), 
                              std::lower_bound( _initial.begin(), _initial.end(), currentTime ) );
-        Assert( idx == _initial.size() || currentTime <= _initial[idx] );
+        Assert( idx == static_cast<double>( _initial.size() ) || currentTime <= _initial[idx] );
         
 		//	compute a new time for the Breakpoint at pIter:
 		double newtime = 0;
@@ -209,7 +209,7 @@ Dilator::dilate( Partial & p ) const
 			else
 				newtime = _target[idx] + (currentTime - _initial[idx]);
 		}
-		else if ( idx == _initial.size() ) 
+		else if ( idx == static_cast<double>( _initial.size() ) ) 
 		{
 			//	all time points in _initial are earlier than 
 			//	the currentTime; shift:
@@ -240,7 +240,7 @@ Dilator::dilate( Partial & p ) const
 	//	to all target time points that are after the first Breakpoint and
 	//	before the last, otherwise, Partials may be briefly out of tune with
 	//	each other, since our Breakpoints are non-uniformly distributed in time:
-	for ( idx = 0; idx < _initial.size(); ++ idx )
+	for ( idx = 0; idx <  static_cast<double>( _initial.size() ); ++ idx )
 	{
 		if ( _initial[idx] <= p.startTime() )
         {

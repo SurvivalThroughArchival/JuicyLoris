@@ -63,7 +63,8 @@ namespace PartialUtils {
 //!
 //! \invariant	env is a non-zero pointer to a valid instance of a 
 //!            class derived from the abstract class Envelope.
-class PartialMutator : public std::unary_function< Partial, void >
+//class PartialMutator : public std::unary_function< Partial, void >
+class PartialMutator : public std::function< void(Partial)  >
 {
 public:
 
@@ -967,7 +968,7 @@ void fixPhaseBetween( Iter b, Iter e, double t1, double t2 )
 //! Partial argument is less than the specified duration in
 //! seconds, and false otherwise.
 //
-class isDurationLess : public std::unary_function< const Partial, bool >
+class isDurationLess : public std::function< bool(const Partial) >
 {
 public:
     //! Initialize a new instance with the specified label.
@@ -991,7 +992,7 @@ private:
 //! Predicate functor returning true if the label of its Partial argument is
 //! equal to the specified 32-bit label, and false otherwise.
 //
-class isLabelEqual : public std::unary_function< const Partial, bool >
+class isLabelEqual : public std::function< bool(const Partial) >
 {
 public:
     //! Initialize a new instance with the specified label.
@@ -1015,7 +1016,7 @@ private:
 //! Predicate functor returning true if the label of its Partial argument is
 //! greater than the specified 32-bit label, and false otherwise.
 //
-class isLabelGreater : public std::unary_function< const Partial, bool >
+class isLabelGreater : public std::function<bool(const Partial) >
 {
 public:
    //! Initialize a new instance with the specified label.
@@ -1039,7 +1040,7 @@ private:
 //! Predicate functor returning true if the label of its Partial argument is
 //! less than the specified 32-bit label, and false otherwise.
 //
-class isLabelLess : public std::unary_function< const Partial, bool >
+class isLabelLess : public std::function< bool(const Partial) >
 {
 public:
    //! Initialize a new instance with the specified label.
@@ -1064,7 +1065,7 @@ private:
 //! Partial argument is less than the specified absolute amplitude, and 
 //! false otherwise.
 //
-class isPeakLess : public std::unary_function< const Partial, bool >
+class isPeakLess : public std::function< bool(const Partial) >
 {
 public:
     //! Initialize a new instance with the specified peak amplitude.
@@ -1092,7 +1093,7 @@ private:
 //! that of the second Partial argument's label, and false otherwise.
 //
 class compareLabelLess : 
-	public std::binary_function< const Partial, const Partial, bool >
+	public std::function<bool(const Partial, const Partial) >
 {
 public:
    //! Compare two Partials, return true if its first Partial
@@ -1116,7 +1117,7 @@ public:
 //! argument, and false otherwise.
 //
 class compareDurationLess : 
-	public std::binary_function< const Partial, const Partial, bool >
+	public std::function<bool(const Partial, const Partial) >
 {
 public:
    //! Compare two Partials, return true if its first Partial
@@ -1140,7 +1141,7 @@ public:
 //! argument, and false otherwise.
 //
 class compareDurationGreater : 
-	public std::binary_function< const Partial, const Partial, bool >
+	public std::function<bool(const Partial, const Partial) >
 {
 public:
    //! Compare two Partials, return true if its first Partial
@@ -1163,8 +1164,8 @@ public:
 //! argument has start time earlier than that of the second Partial
 //! argument, and false otherwise.
 //
-class compareStartTimeLess : 
-	public std::binary_function< const Partial, const Partial, bool >
+class compareStartTimeLess :
+	public std::function<bool(const Partial, const Partial) > 
 {
 public:
    //! Compare two Partials, return true if its first Partial

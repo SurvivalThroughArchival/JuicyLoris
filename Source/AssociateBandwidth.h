@@ -35,8 +35,14 @@
  *
  */
 
+#include "Breakpoint.h"
+#include "BreakpointUtils.h"
+#include "LorisExceptions.h"
+#include "Notifier.h"
 #include "SpectralPeaks.h"
 
+#include <algorithm>
+#include <cmath>
 #include <vector>
 
 //	begin namespace

@@ -221,9 +221,10 @@ static void merge( Partial::const_iterator beg,
 //	AND its onset should be retained (!!! This is the weird part!!!). 
 //  Therefore, if cbeg is not equal to cend, then cbeg is pshort.begin().
 //
+// findContribution( Partial & pshort, const Partial & plong, 
+// 				  double fadeTime, double gapTime )
 std::pair< Partial::iterator, Partial::iterator >
-findContribution( Partial & pshort, const Partial & plong, 
-				  double fadeTime, double gapTime )
+findContribution( Partial & pshort, const Partial & plong, double gapTime )
 {
 	//	a Breakpoint can only fit in the gap if there's
 	//	enough time to fade out pshort, introduce a
@@ -337,7 +338,7 @@ void Distiller::distillOne( PartialList & partials, Partial::label_type label,
             fadeInAndOut( *it, _fadeTime );
             
     		std::pair< Partial::iterator, Partial::iterator > range = 
-    			findContribution( *it, newp, _fadeTime, _gapTime );
+    			findContribution( *it, newp, _gapTime );
     		Partial::iterator cb = range.first, ce = range.second;
 
             //  There can only be one contributing regions because
@@ -446,7 +447,7 @@ PartialList::iterator Distiller::distill_list( PartialList & partials )
         //  identify a sequence of Partials having the same label:
 	    PartialList::iterator upper = 
 	        std::find_if( lower, partials.end(),
-	                      std::not1( PartialUtils::isLabelEqual( label ) ) );
+	                      std::not_fn( PartialUtils::isLabelEqual( label ) ) );
                             
         //  upper is the first Partial after lower whose label is not
         //  equal to that of lower.
@@ -468,7 +469,7 @@ PartialList::iterator Distiller::distill_list( PartialList & partials )
     // only unlabeled Partials should remain in partials:
     Assert( partials.end() ==
             std::find_if( partials.begin(), partials.end(), 
-                          std::not1( PartialUtils::isLabelEqual( 0 ) ) ) );
+                          std::not_fn( PartialUtils::isLabelEqual( 0 ) ) ) );
 #endif    
     
     //  remember where the unlabeled Partials start:

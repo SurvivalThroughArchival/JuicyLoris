@@ -38,14 +38,14 @@
 #endif
 
 #include "AssociateBandwidth.h"
-#include "Breakpoint.h"
-#include "BreakpointUtils.h"
-#include "LorisExceptions.h"
-#include "Notifier.h"
-#include "SpectralPeaks.h"
+// #include "Breakpoint.h"
+// #include "BreakpointUtils.h"
+// #include "LorisExceptions.h"
+// #include "Notifier.h"
+// #include "SpectralPeaks.h"
 
-#include <algorithm>
-#include <cmath>
+// #include <algorithm>
+// #include <cmath>
 
 using namespace Loris;
 
