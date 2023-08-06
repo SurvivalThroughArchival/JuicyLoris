@@ -509,7 +509,6 @@ evaluate_Qprime( const vector<double> & amps,
 // ---------------------------------------------------------------------------
 //  --- secant method of refining a root/peak estimate ---
 // ---------------------------------------------------------------------------
-
 //	secant_method
 //
 //	Find roots of the derivative of the likelihood

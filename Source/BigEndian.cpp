@@ -36,9 +36,6 @@
 #endif
 
 #include "BigEndian.h"
-#include "LorisExceptions.h"
-#include <vector>
-#include <iostream>
 
 //	begin namespace
 namespace Loris {

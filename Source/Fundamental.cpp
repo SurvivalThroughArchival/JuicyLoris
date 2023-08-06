@@ -40,27 +40,13 @@
 
 #include "Fundamental.h"
 
-#include "LorisExceptions.h"
-#include "KaiserWindow.h"
-#include "LinearEnvelope.h"
-#include "Notifier.h"
-#include "PartialUtils.h"
-#include "ReassignedSpectrum.h"
-#include "SpectralPeakSelector.h"
-
-#include "F0Estimate.h" 
-
-#include <algorithm>
-#include <cmath>
-#include <vector>
-
 using namespace std;
 
-#if defined(HAVE_M_PI) && (HAVE_M_PI)
-	const double Pi = M_PI;
-#else
-	const double Pi = 3.14159265358979324;
-#endif
+// #if defined(HAVE_M_PI) && (HAVE_M_PI)
+// 	const double Pi = M_PI;
+// #else
+// 	const double Pi = 3.14159265358979324;
+// #endif
 
 //	begin namespace
 namespace Loris {

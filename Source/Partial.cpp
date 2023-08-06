@@ -42,6 +42,8 @@
 
 #include <algorithm>
 #include <cmath>
+#include <vector>
+#include <map>
 
 #if defined(HAVE_M_PI) && (HAVE_M_PI)
 	const double Pi = M_PI;
@@ -76,7 +78,8 @@ bool order_by_time( const Partial_value_type & x, const Partial_value_type & y )
 //	is easy to change the container type, but it is a much harder
 //	project to find all the places in Loris that rely on iterators
 //	that remain valid after insertions and removals.
-#undef USE_VECTOR
+ #undef USE_VECTOR
+// #define USE_VECTOR
 
 
 // -- construction --
@@ -113,8 +116,8 @@ Partial::Partial( const_iterator beg, const_iterator end ) :
 //!	Partial.
 //
 Partial::Partial( const Partial & other ) :
-	_breakpoints( other._breakpoints ),
-	_label( other._label )
+	_label( other._label ),
+	_breakpoints( other._breakpoints )
 {
 //	++DebugCounter;
 }

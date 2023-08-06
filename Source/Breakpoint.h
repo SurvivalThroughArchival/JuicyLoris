@@ -33,6 +33,9 @@
  *
  */
 
+#include "LorisExceptions.h"
+#include <cmath>
+
 //	begin namespace
 namespace Loris {
 

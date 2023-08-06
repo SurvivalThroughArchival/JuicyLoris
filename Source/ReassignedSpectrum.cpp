@@ -539,8 +539,8 @@ ReassignedSpectrum::operator[]( unsigned long idx ) const
 //	Function object for building complex numbers.
 //
 template <class T>
-struct make_complex
-	: binary_function< T, T, std::complex<T> >
+//struct make_complex : binary_function< T, T, std::complex<T> >
+struct make_complex : function< std::complex<T> (T, T) >
 {
 	std::complex<T> operator()(const T& re, const T& im) const
     {
@@ -577,10 +577,15 @@ static inline void applyFreqRamp( vector< double > & w  )
 	//	and has to be scaled by the ratio of the 
 	//	transform lengths, so that k spans the length
 	//	of the padded transforms, N)
-	for ( int k = 0 ; k < temp.size(); ++k ) 
+	int tempSize = static_cast<int>(temp.size());
+	//for ( int k = 0 ; k < temp.size(); ++k )
+	for ( int k = 0 ; k < tempSize; ++k )  
 	{
 	   double x = (double)k;   // to get type promotion right
+	   //int tempSize = static_cast<int>(temp.size());
+
 		if ( k < temp.size() / 2 ) 
+		//if ( k < tempSize / 2 ) 
 		{
 			temp[ k ] *= x;
 		}
@@ -600,7 +605,9 @@ static inline void applyFreqRamp( vector< double > & w  )
 	//	seems that I want the imaginary part of the index-reversed
 	//	transform scaled by the size of the transform:
 	std::reverse( temp.begin() + 1, temp.end() );
-	for ( int i = 0; i < w.size(); ++i ) 
+	int wSize = static_cast<int>(w.size());
+	//for ( int i = 0; i < w.size(); ++i ) 
+	for ( int i = 0; i < wSize; ++i ) 
 	{
 		w[i] = - imag( temp[i] ) / temp.size();
 	}
@@ -618,7 +625,9 @@ static inline void applyTimeRamp( vector< double > & w )
 	//	need a fractional value for even-length windows, a
 	//	whole number for odd-length windows:
 	double offset = 0.5 * ( w.size() - 1 );
-	for ( int k = 0 ; k < w.size(); ++k ) 
+	int wSize = static_cast<int>(w.size());
+	//for ( int k = 0 ; k < w.size(); ++k ) 
+	for ( int k = 0 ; k < wSize; ++k ) 
 	{
 		w[ k ] *= ( k - offset );
 	}

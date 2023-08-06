@@ -98,7 +98,7 @@ Breakpoint makeNullAfter( const Breakpoint & bp, double fadeTime ); // see Break
 //!	has frequency between specified bounds, and false otherwise.
 //
 class isFrequencyBetween : 
-	public std::unary_function< const Breakpoint, bool >
+	public std::function< bool(const Breakpoint) >
 {
 public:
 	//! Return true if its Breakpoint argument has frequency 
@@ -159,7 +159,7 @@ static bool isNull( const Breakpoint & bp )
 //!	and false otherwise.
 //
 class compareFrequencyLess : 
-	public std::binary_function< const Breakpoint, const Breakpoint, bool >
+	public std::function<bool(const Breakpoint, const Breakpoint) > 
 {
 public:
 	//! Return true if its first Breakpoint argument has frequency less 
@@ -180,7 +180,7 @@ typedef compareFrequencyLess less_frequency;
 //!	and false otherwise.
 //
 class compareAmplitudeGreater : 
-	public std::binary_function< const Breakpoint, const Breakpoint, bool >
+	public std::function<bool(const Breakpoint, const Breakpoint) > 
 {
 public:
 	//!	Return true if its first Breakpoint argument has amplitude greater 
@@ -200,8 +200,8 @@ typedef compareAmplitudeGreater greater_amplitude;
 //!	argument has amplitude less than that of its second Breakpoint argument,
 //!	and false otherwise.
 //
-class compareAmplitudeLess : 
-	public std::binary_function< const Breakpoint, const Breakpoint, bool >
+class compareAmplitudeLess :
+	public std::function<bool(const Breakpoint, const Breakpoint) >  
 {
 public:
 	//!	Return true if its first Breakpoint argument has amplitude greater 

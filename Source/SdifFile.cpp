@@ -485,22 +485,22 @@ static int SizeofSanityCheck(void) {
     static char errorMessage[sizeof("sizeof(sdif_float64) is 999!!!")];
 
     if (sizeof(sdif_int16) != 2) {
-    	sprintf(errorMessage, "sizeof(sdif_int16) is %d!", (int)sizeof(sdif_int16));
+		snprintf(errorMessage, sizeof(errorMessage), "sizeof(sdif_int16) is %d!", (int)sizeof(sdif_int16));
 		OK = 0;
     }
 
     if (sizeof(sdif_int32) != 4) {
-    	sprintf(errorMessage, "sizeof(sdif_int32) is %d!", (int)sizeof(sdif_int32));
+    	snprintf(errorMessage, sizeof(errorMessage), "sizeof(sdif_int32) is %d!", (int)sizeof(sdif_int32));
 		OK = 0;
     }
 
     if (sizeof(sdif_float32) != 4) {
-		sprintf(errorMessage, "sizeof(sdif_float32) is %d!", (int)sizeof(sdif_float32));
+		snprintf(errorMessage, sizeof(errorMessage), "sizeof(sdif_float32) is %d!", (int)sizeof(sdif_float32));
 		OK = 0;
     }
 
     if (sizeof(sdif_float64) != 8) {
-		sprintf(errorMessage, "sizeof(sdif_float64) is %d!", (int)sizeof(sdif_float64));
+		snprintf(errorMessage, sizeof(errorMessage), "sizeof(sdif_float64) is %d!", (int)sizeof(sdif_float64));
 		OK = 0;
     }
 
@@ -1198,6 +1198,7 @@ readMarkers( FILE * file, SDIF_FrameHeader fh, SdifFile::markers_type & markersV
 		// Read strings.
 		std::string markerName;
 		int markerNumber = 0;
+		int markerSize = static_cast<int>(markersVector.size());
 		for (int row = 0; row < mh.rowCount; row++)
 		{
 			char ch;
@@ -1211,7 +1212,9 @@ readMarkers( FILE * file, SDIF_FrameHeader fh, SdifFile::markers_type & markersV
 				
 				// Prepare to get name of next marker.
 				markerNumber++;
-				if (markerNumber > markersVector.size()) 
+				//int markerSize = static_cast<int>(markersVector.size());
+				//if (markerNumber > markersVector.size()) 
+				if (markerNumber > markerSize) 
 				{
 					Throw( FileIOException, "Markers frame has bad format." );
 				}
@@ -1224,7 +1227,8 @@ readMarkers( FILE * file, SDIF_FrameHeader fh, SdifFile::markers_type & markersV
 		}
 			
 		// There should be one marker name for each marker time.
-		if (markerNumber != markersVector.size()) 
+		//if (markerNumber != markersVector.size()) 
+		if (markerNumber != markerSize) 
 		{
 			Throw( FileIOException, "Markers frame has bad format." );
 		}
@@ -1375,7 +1379,9 @@ static void import_sdif( const std::string &infilename,
 		readLorisMatrices( file, partialsVector, markersVector );
 		
 		// Copy partialsVector to partials list.
-		for (int i = 0; i < partialsVector.size(); ++i)
+		int partialSize = static_cast<int>(partialsVector.size());
+		//for (int i = 0; i < partialsVector.size(); ++i)
+		for (int i = 0; i < partialSize; ++i)
 		{
 			if (partialsVector[i].numBreakpoints() > 0)
 			{
@@ -1384,7 +1390,10 @@ static void import_sdif( const std::string &infilename,
 		}
 		
 		// Copy markersVector to markers list.
-		for (int i = 0; i < markersVector.size(); ++i)
+		int markerSize = static_cast<int>(markersVector.size());
+
+		//for (int i = 0; i < markersVector.size(); ++i)
+		for (int i = 0; i < markerSize; ++i)
 		{
 			markers.push_back( markersVector[i] );
 		}
@@ -1439,7 +1448,9 @@ makeSortedBreakpointTimes( const ConstPartialPtrs & partialsVector,
 {
 
 // Make list of all breakpoint times from all partials.
-	for (int i = 0; i < partialsVector.size(); i++) 
+	int partialsSize = static_cast<int>(partialsVector.size());
+	//for (int i = 0; i < partialsVector.size(); i++) 
+	for (int i = 0; i < partialsSize; i++) 
 	{
 		for ( Partial::const_iterator it = partialsVector[i]->begin(); 
 			  it != partialsVector[i]->end();
@@ -1655,8 +1666,10 @@ collectActiveIndices( const ConstPartialPtrs & partialsVector,
 	} 
 #endif
 	Assert( nextFrameTime > frameTime );
-		
-	for ( int i = 0; i < partialsVector.size(); i++ ) 
+	
+	int partialSize = static_cast<int>(partialsVector.size());
+	//for ( int i = 0; i < partialsVector.size(); i++ ) 
+	for ( int i = 0; i < partialSize; i++ ) 
 	{
 		Assert( partialsVector[ i ] != 0 );
 		
@@ -1731,7 +1744,9 @@ writeEnvelopeLabels( FILE * out, const ConstPartialPtrs & partialsVector )
 //
 	sdif_float64 *dp = data;
 	int anyLabel = false;
-	for (int i = 0; i < partialsVector.size(); i++) 
+	int partialSize = static_cast<int>(partialsVector.size());
+	//for (int i = 0; i < partialsVector.size(); i++) 
+	for (int i = 0; i < partialSize; i++) 
 	{
 		int labl = partialsVector[i]->label();
 		anyLabel |= (labl != 0);
@@ -1810,7 +1825,9 @@ writeMarkers( FILE * out, const SdifFile::markers_type &markers )
 //
 // Get matrix data from each marker.
 //
-	for (int marker = 0; marker < markers.size(); marker++)
+	int markerSize = static_cast<int>(markers.size());
+	//for (int marker = 0; marker < markers.size(); marker++)
+	for (int marker = 0; marker < markerSize; marker++)
 	{
 		markerTimes.push_back( markers[marker].time() );
 		markerNames += markers[marker].name() + '\0';
@@ -1884,8 +1901,10 @@ assembleMatrixData( sdif_float64 *data, const bool enhanced,
 {	
 	// The array matrix data is row-major order at "data".
 	sdif_float64 *rowDataPtr = data;
-	
-	for ( int i = 0; i < activeIndices.size(); i++ ) 
+
+	int activeInd = static_cast<int>(activeIndices.size());
+	//for ( int i = 0; i < activeIndices.size(); i++ ) 
+	for ( int i = 0; i < activeInd; i++ ) 
 	{
 		
 		int index = activeIndices[ i ];

@@ -38,15 +38,6 @@
 
 #include "SpectralPeakSelector.h"
 
-
-#include "Breakpoint.h"
-#include "Notifier.h"
-#include "ReassignedSpectrum.h"
-
-
-#include <cmath>    //  for abs and fabs
-
-
 // define this to use local minima in frequency
 // reassignment to detect "peaks", otherwise 
 // magnitude peaks are used.

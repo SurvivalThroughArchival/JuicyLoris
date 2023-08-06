@@ -424,6 +424,8 @@ Synthesizer::filter( void )
     
 static const double Default_FadeTime_Ms = 1;
 static const double Default_SampleRate_Hz = 44100;
+
+
 //static const Synthesizer::EnhancementFlag Default_Enhancement_Flag = Synthesizer::BwEnhanced;
 
 
