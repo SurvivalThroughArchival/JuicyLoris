@@ -97,6 +97,12 @@ Also is there places you can slap const and constexpr? I assume not a lot can be
 
 Best bet is looking at the memory allocations next, I've used used snatitisers and I attribute the now working code entirely to the things the santitizers picked up on. Tried Address and nothing there. But couldn't get leaks, or memory sanitizer working on M1. Will try on the other mac. 
 
+# Reading: 
+
+https://www.hakenaudio.com/addsoundmorph
+
+https://www.semanticscholar.org/paper/Real-Time-Timbre-Modificiations-Using-Sinusoidal-Haken/96dbbe1150c634432040dd8d66ca7b5731efe323
+
 # Quick Notes to potentially have a ganders at:
 
 Deprecated in C++11 unary_function, binary_function, not1. Sprinkled about in Partial, Maker and Breakpoint files. 
