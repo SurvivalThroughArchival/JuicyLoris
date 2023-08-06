@@ -17,6 +17,8 @@ cmake --build Builds
 ```
 And you will have an exectutable in the Builds folder called "HelloLorris-0.0.0"
 
+(And not on how to link to Juce Cmake project for your own benefit, you will forget this arcane babble in about three days time)
+
 # RATIONALE:
 
 A number of people have tried to make the Spectral Morphing library work on Windows and Mac, and failed at the arcane gibberish that is AutoMake/AutoConf. The original Package did a lot, including making a Python library, and CSound opcodes. This is not the intention here. 
@@ -69,7 +71,11 @@ Carrying on optimisations on library, but in a reasonable state for now.
 
 Explore adding FFTW
 
-Upload basic Juce example, or the whole plugin I've been working on
+Upload basic Juce example, or the whole plugin I've been working on: 
+
+https://youtu.be/MYvt4E-pvZc
+
+https://youtu.be/aomSHigAmJw
 
 Figure out displaying the partials in the envelopes, and how to get inside the iterators for the paritals to display some relevant information/track partials over time. 
 
@@ -77,6 +83,14 @@ Figure out resynthesis in real time. So either just block load parts of the SDIF
 as that's what the real time paper on it suggests doing, the SDIF isn't block based, or not equally spaced, and the spc file is a better match for block based processing I think, I haven't had a look yet. 
 
 So get more relevant information about the partials and envelopes, and try and side step that abstraction with break point envelopes into a normalised parameter that can be updated or respond to real time interaction. But that requires unpacking the what this managerie of fuck whittery that is the morph class abstraction. 
+
+Random odd thing on M1, it's quicker in debug mode with optimisations on, do exactly the same with release on and it's slower, so screw it just call it a feature. Makes no sense, but just leave it. 
+
+Changed a load of stuff to function, and that might be better going over to lambdas instead. 
+
+Also is there places you can slap const and constexpr? I assume not a lot can be done as everything is needed in the future when the app is running. Not much precompute can happen as there's no data yet. 
+
+Best bet is looking at the memory allocations next, I've used used snatitisers and I attribute the now working code entirely to the things the santitizers picked up on. Tried Address and nothing there. But couldn't get leaks, or memory sanitizer working on M1. Will try on the other mac. 
 
 # Quick Notes to potentially have a ganders at:
 
