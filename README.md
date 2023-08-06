@@ -73,9 +73,14 @@ Explore adding FFTW
 
 Upload basic Juce example, or the whole plugin I've been working on: 
 
-https://youtu.be/MYvt4E-pvZc
 
-https://youtu.be/aomSHigAmJw
+https://github.com/SurvivalThroughArchival/JuicyLoris/assets/8919335/90d86789-fb9d-495f-b32f-8a25680bc4af
+
+
+
+https://github.com/SurvivalThroughArchival/JuicyLoris/assets/8919335/0e475ee3-7867-4d40-a223-9886e8df1585
+
+
 
 Figure out displaying the partials in the envelopes, and how to get inside the iterators for the paritals to display some relevant information/track partials over time. 
 
